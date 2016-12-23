@@ -1,0 +1,42 @@
+{% extends 'whayp/base.html' %}
+{% block title %}All Photos{% endblock %}
+{% block photos_active %}active{% endblock %}
+
+{% block body %}
+<div class="container-fluid photos-container">
+
+    <div class="row">
+        <div class="col-sm-12">
+            <ul class="nav nav-pills" style="margin-bottom: 10px;">
+                <li role="presentation"
+                    {% if filter_by == 'all' %}
+                        class="active"
+                {% endif %}>
+                <a href="{% url 'whayp:photos' 'all' %}">View All</a></li>
+                <li role="presentation"
+                    {% if filter_by == 'favorites' %}
+                class="active"
+                {% endif %}>
+                <a href="{% url 'whayp:photos' 'favorites' %}">Favorites</a></li>
+            </ul>
+        </div>
+    </div>
+
+    <div class="row">
+
+        <div class="col-sm-12">
+
+            <div class="panel panel-default">
+                <div class="panel-body">
+                            {% for photo in photo_list %}
+                                <img src="{{photo.photo_file.url}}"  style="width:300px;height:200px;">
+                            {% endfor %}
+                </div>
+            </div>
+
+        </div>
+
+    </div>
+
+</div>
+{% endblock %}

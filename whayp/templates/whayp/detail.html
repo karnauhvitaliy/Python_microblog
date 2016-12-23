@@ -1,0 +1,45 @@
+{% extends 'whayp/base.html' %}
+{% block posts_active %}active{% endblock %}
+
+{% block body %}
+<div class="container-fluid photos-container">
+
+    <div class="row">
+        <!-- Right Photo Info -->
+        <div class="col-sm-8 col-md-9">
+
+            <div class="panel panel-default">
+                <div class="panel-body">
+
+                    {% if error_message %}
+                    <p><strong>{{ error_message }}</strong></p>
+                    {% endif %}
+                    {% for photo in post.photo_set.all %}
+                                <img src="{{photo.photo_file.url}}"  style="width:300px;height:200px;">
+                    {% endfor %}
+                    </table>
+
+                </div>
+            </div>
+
+        </div>
+        <div class="col-sm-4 col-md-3">
+            <div class="panel panel-default">
+                <div class="panel-body">
+                    <h2>{{user}}</h2>
+                    {{post.description}}
+                    <BR>
+                    {{post.pub_date}}
+                      <a href="{% url 'whayp:favorite_post' post.id %}" class="btn btn-default btn-sm btn-favorite"
+                           role="button">
+                            <span class="glyphicon glyphicon-star {% if post.is_favorite %}active{% endif %}"></span>
+                        </a>
+                </div>
+            </div>
+        </div>
+
+    </div>
+
+</div>
+
+{% endblock %}
